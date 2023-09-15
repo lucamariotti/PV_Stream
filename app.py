@@ -20,9 +20,14 @@ credentials = service_account.Credentials.from_service_account_info(
 conn = connect(credentials=credentials)
 
 # Read uploaded file with comma as decimal separator
-sheet_id = '1006944565'
-csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
-database_df = pd.read_csv(csv_url,decimal=',')
+@st.cache_data(ttl=600)
+def load_data(sheets_url):
+    csv_url = sheets_url.replace('/edit#gid=', '/export?format=csv&gid=')
+    return pd.read_csv(csv_url, decimal=',')
+
+
+#load the data
+data = load_data(st.secrets["public_gsheets_url"])
 
 # Convert "Date" column to datetime format
 data['Data'] = pd.to_datetime(data['Data'],format="%d/%m/%Y")
