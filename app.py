@@ -19,15 +19,14 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 conn = connect(credentials=credentials)
 
-# Read uploaded file with comma as decimal separator
 @st.cache_data(ttl=600)
-def load_data(sheets_url):
-    csv_url = sheets_url.replace('/edit#gid=', '/export?format=csv&gid=')
-    return pd.read_csv(csv_url, decimal=',')
+def run_query(query):
+    rows = conn.execute(query, headers=1)
+    rows = rows.fetchall()
+    return rows
 
-
-#load the data
-data = load_data(st.secrets["private_gsheets_url"])
+sheet_url = st.secrets["private_gsheets_url"]
+data = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Convert "Date" column to datetime format
 data['Data'] = pd.to_datetime(data['Data'],format="%d/%m/%Y")
