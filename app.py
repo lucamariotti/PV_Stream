@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-import gspread
 from google.oauth2 import service_account
+from gsheetsdb import connect
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -14,11 +14,10 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=[
-        "https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive"
+        "https://www.googleapis.com/auth/spreadsheets",
     ],
 )
 conn = connect(credentials=credentials)
-client=gspread.authorize(credentials)
 
 # Read uploaded file with comma as decimal separator
 sheet_id = '1006944565'
