@@ -26,8 +26,12 @@ def run_query(query):
     return rows
 
 sheet_url = st.secrets["private_gsheets_url"]
-data = run_query(f'SELECT * FROM "{sheet_url}"')
+row = run_query(f'SELECT * FROM "{sheet_url}"')
 
+# Print results.
+for row in rows:
+    st.write(f"{row.Data} has a :{row.Mese}:")
+    
 # Convert "Date" column to datetime format
 data['Data'] = pd.to_datetime(data['Data'],format="%d/%m/%Y")
 
