@@ -27,7 +27,7 @@ def load_data(sheets_url):
 
 
 #load the data
-data = load_data(st.secrets["public_gsheets_url"])
+data = load_data(st.secrets["private_gsheets_url"])
 
 # Convert "Date" column to datetime format
 data['Data'] = pd.to_datetime(data['Data'],format="%d/%m/%Y")
