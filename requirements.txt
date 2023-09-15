@@ -2,4 +2,5 @@ pandas
 streamlit
 matplotlib
 plotly
-gsheetsdb==0.1.13
+gspread
+google-auth
