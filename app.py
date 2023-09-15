@@ -5,12 +5,25 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-
+import gspread
+from google.oauth2 import service_account
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
+# Create a connection object.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive"
+    ],
+)
+conn = connect(credentials=credentials)
+client=gspread.authorize(credentials)
+
 # Read uploaded file with comma as decimal separator
-data = pd.read_csv('Fotovoltaico_PacchiaHouse - DB.csv', decimal=',')
+sheet_id = '1006944565'
+csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+database_df = pd.read_csv(csv_url,decimal=',')
 
 # Convert "Date" column to datetime format
 data['Data'] = pd.to_datetime(data['Data'],format="%d/%m/%Y")
