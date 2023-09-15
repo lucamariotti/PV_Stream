@@ -26,7 +26,7 @@ def run_query(query):
     return rows
 
 sheet_url = st.secrets["private_gsheets_url"]
-row = run_query(f'SELECT * FROM "{sheet_url}"')
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 for row in rows:
