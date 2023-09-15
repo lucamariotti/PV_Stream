@@ -4,3 +4,4 @@ matplotlib
 plotly
 gspread
 google-auth
+gsheetsdb
