@@ -98,6 +98,8 @@ st.plotly_chart(fig2)
 # Plot stacked bar chart using Plotly
 st.subheader('% Ripartizione utilizzo e immissione in rete (giorno)')
 fig4 = px.bar(ripartizione_prod_immessa_giorno[['Percentage_energia_utilazzata','Percentage_energia_immessa']], barmode='stack')
+fig4.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': ['LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB', 'DOM']})
+
 st.plotly_chart(fig4)
 
        
