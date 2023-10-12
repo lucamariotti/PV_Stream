@@ -47,6 +47,10 @@ else:
 # Group by month 
 energia_utilizzata_fv = filtered_data.groupby('mese')['Energia utilizzata fotovoltaico ora'].sum()
 
+# Group by month consumo_casa
+consumo_casa = filtered_data.groupby('mese')['consumo casa ora'].sum()
+
+
 # Costo by day split between costo con pannello e senza 
 costo_energia = filtered_data.groupby('Data')[['costo con pannello','costo senza pannello']].sum()
 costo_energia_mese = filtered_data.groupby('mese')[['costo con pannello','costo senza pannello']].sum()
@@ -70,13 +74,15 @@ ripartizione_prod_immessa_giorno['Percentage_energia_utilazzata'] = ripartizione
 ripartizione_prod_immessa_giorno['Percentage_energia_immessa'] = ripartizione_prod_immessa_giorno['energia immessa ora'] / total_values_day * 100
 
 
-
-
 # Plot aggregated energia utilizzata fv using Plotly
 st.subheader('Energia utilizzata fotovoltaico mese')
 fig = px.bar(energia_utilizzata_fv)
 st.plotly_chart(fig)
 
+#Plot consumo casa reale 
+st.subheader('Consumo casa mese')
+fig6 = px.bar(consumo_casa)
+st.plotly_chart(fig6)
 
 # Plot aggregated data using Plotly
 st.subheader('Costo con e senza pannello mese')
