@@ -49,7 +49,7 @@ energia_utilizzata_fv = filtered_data.groupby('mese')['Energia utilizzata fotovo
 
 # Group by month consumo_casa
 consumo_casa = filtered_data.groupby('mese')['consumo casa ora'].sum()
-consumo_casa = cosumo_casa.sort_values(by='mese')
+
 
 
 # Costo by day split between costo con pannello e senza 
@@ -83,7 +83,7 @@ st.plotly_chart(fig)
 #Plot consumo casa reale 
 st.subheader('Consumo casa mese')
 fig6 = px.bar(consumo_casa)
-#fig6.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': months})
+fig6.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': months})
 st.plotly_chart(fig6)
 
 # Plot aggregated data using Plotly
