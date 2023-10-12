@@ -82,6 +82,7 @@ st.plotly_chart(fig)
 #Plot consumo casa reale 
 st.subheader('Consumo casa mese')
 fig6 = px.bar(consumo_casa)
+fig6.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC']})
 st.plotly_chart(fig6)
 
 # Plot aggregated data using Plotly
