@@ -73,7 +73,7 @@ total_values_day = filtered_data.groupby('giorno')['produzione fotovoltaico ora'
 ripartizione_prod_immessa_giorno['Percentage_energia_utilazzata'] = ripartizione_prod_immessa_giorno['Energia utilizzata fotovoltaico ora'] / total_values_day * 100
 ripartizione_prod_immessa_giorno['Percentage_energia_immessa'] = ripartizione_prod_immessa_giorno['energia immessa ora'] / total_values_day * 100
 
-
+months =  ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 # Plot aggregated energia utilizzata fv using Plotly
 st.subheader('Energia utilizzata fotovoltaico mese')
 fig = px.bar(energia_utilizzata_fv)
@@ -82,7 +82,7 @@ st.plotly_chart(fig)
 #Plot consumo casa reale 
 st.subheader('Consumo casa mese')
 fig6 = px.bar(consumo_casa)
-fig6.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': ['AUG','SEP','OCT']})
+fig6.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': months})
 st.plotly_chart(fig6)
 
 # Plot aggregated data using Plotly
