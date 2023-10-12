@@ -49,6 +49,7 @@ energia_utilizzata_fv = filtered_data.groupby('mese')['Energia utilizzata fotovo
 
 # Group by month consumo_casa
 consumo_casa = filtered_data.groupby('mese')['consumo casa ora'].sum().reset_index(inplace=True)
+consumo_casa = cosumo_casa.sort_values(by='mese')
 
 
 # Costo by day split between costo con pannello e senza 
