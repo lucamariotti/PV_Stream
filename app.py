@@ -78,6 +78,7 @@ months =  ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DE
 # Plot aggregated energia utilizzata fv using Plotly
 st.subheader('Energia utilizzata fotovoltaico mese')
 fig = px.bar(energia_utilizzata_fv)
+fig.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': months})
 st.plotly_chart(fig)
 
 #Plot consumo casa reale 
@@ -89,6 +90,7 @@ st.plotly_chart(fig6)
 # Plot aggregated data using Plotly
 st.subheader('Costo con e senza pannello mese')
 fig5 = px.bar(costo_energia_mese, barmode= 'group')
+fig5.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': months})
 st.plotly_chart(fig5)
 
     
@@ -100,6 +102,7 @@ st.plotly_chart(fig3)
 # Plot stacked bar chart using Plotly
 st.subheader('% Ripartizione utilizzo e immissione in rete mese')
 fig2 = px.bar(ripartizione_prod_immessa[['Percentage_energia_utilazzata','Percentage_energia_immessa']], barmode='stack')
+fig2.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': months})
 st.plotly_chart(fig2)
         
 
