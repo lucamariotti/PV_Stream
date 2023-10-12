@@ -48,7 +48,7 @@ else:
 energia_utilizzata_fv = filtered_data.groupby('mese')['Energia utilizzata fotovoltaico ora'].sum()
 
 # Group by month consumo_casa
-consumo_casa = filtered_data.groupby('mese')['consumo casa ora'].sum().reset_index(inplace=True)
+consumo_casa = filtered_data.groupby('mese')['consumo casa ora'].sum()
 consumo_casa = cosumo_casa.sort_values(by='mese')
 
 
