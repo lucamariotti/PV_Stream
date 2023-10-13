@@ -35,12 +35,13 @@ st.title('Monitoraggio PacchiaHouse')
 #filters sidebar creation 
 st.sidebar.subheader('Filtri')
 selected_fascia = st.sidebar.selectbox('Seleziona fascia',['PICCO','FUORI','TOTALE'])
+selected_anno = st.sidebar.selectbox('Seleziona Anno', [2023,2024])
 
 # Filter data based fascia 
 if selected_fascia == "TOTALE":
-    filtered_data = data
+    filtered_data = data[data['anno']==selected_anno]
 else:
-    filtered_data = data[data['fascia']==selected_fascia]
+    filtered_data = data[(data['fascia']==selected_fascia) & (data['anno']==selected_anno)]
 
 ##### aggregations ####
 
