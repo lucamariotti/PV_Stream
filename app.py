@@ -5,12 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-import requests
 from google.oauth2 import service_account
 from gsheetsdb import connect
-import os
-
-
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -118,64 +114,7 @@ fig4.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': ['LUN', 'MA
 
 st.plotly_chart(fig4)
 
-## Weather Prediction ##
-
-API_KEY = os.environ.get('OPENWEATHERMAP_API_KEY')
-
-# OpenWeatherMap API configuration
-API_KEY = st.secrets["OPENWEATHERMAP_API_KEY"]  # Accessing the API key from secrets
-
-@st.cache
-def get_weather_data(city):
-    base_url = "https://api.openweathermap.org/data/2.5/weather"
-    params = {
-        "q": city,
-        "appid": API_KEY,
-        "units": "metric"  # You can change units to imperial if you prefer Fahrenheit
-    }
-    response = requests.get(base_url, params=params)
-    return response.json()
-
-@st.cache
-def get_forecast_data(city):
-    base_url = "https://api.openweathermap.org/data/2.5/forecast"
-    params = {
-        "q": city,
-        "appid": API_KEY,
-        "units": "metric"  # You can change units to imperial if you prefer Fahrenheit
-    }
-    response = requests.get(base_url, params=params)
-    return response.json()
-
-# Streamlit app layout
-st.subheader("Previsioni Meteo")
-
-city_name = "Norcia"
-
-if st.button("Get Weather"):
-    weather_data = get_weather_data(city_name)
-
-    if weather_data["cod"] == "404":
-        st.error("City not found. Please enter a valid city name.")
-    else:
-        st.subheader(f"Weather in {city_name}")
-        st.write(f"Temperature: {weather_data['main']['temp']}°C")
-        st.write(f"Description: {weather_data['weather'][0]['description']}")
-
-forecast_button = st.button("Get 5-Day Forecast")
-
-if forecast_button:
-    forecast_data = get_forecast_data(city_name)
-
-    if forecast_data["cod"] == "404":
-        st.error("City not found. Please enter a valid city name.")
-    else:
-        st.subheader(f"5-Day Forecast for {city_name}")
-        for forecast in forecast_data['list']:
-            st.write(f"Date/Time: {forecast['dt_txt']}")
-            st.write(f"Temperature: {forecast['main']['temp']}°C")
-            st.write(f"Description: {forecast['weather'][0]['description']}")
-            st.write("---------------")
+       
 
 
 
