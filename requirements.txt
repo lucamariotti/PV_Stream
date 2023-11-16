@@ -5,3 +5,5 @@ plotly
 gspread
 google-auth
 gsheetsdb
+os
+requests
